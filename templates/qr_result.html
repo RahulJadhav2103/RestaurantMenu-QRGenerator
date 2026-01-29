@@ -1,29 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>generate_qr_code</title>
-    <!----Bootstrap CSS CDN-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+{% extends 'base.html' %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-        <a href="" class="navbar-brand">Generate QR Code</a>
-    </div>
-  </nav> 
-  <!-- QR Code Result -->
-     <div class="container mt-5 align-items-center text-center">
-        <h2>{{ res_name }}</h2>
-        <img src="{{ qr_url }}" alt="QR Code" style="border: 1px solid #000000;">
-        <div>
-            <a href="{{ qr_url }}" download="{{ file_name }}" class="btn btn-primary mt-3">Download QR Code</a>
-            <br>
-            <small>Thank you for using our QR Code Generator Tool</small>
-        </div>
-     </div>
-</body>
-</html>
+{% block title %}QR Code Result{% endblock %}
+
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/qr_result.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="result-container">
+  <h2><i class="fas fa-check-circle" style="color: #667eea;"></i> QR Code Generated Successfully!</h2>
+  
+  <p class="text-muted mb-3">{{ res_name }}</p>
+  
+  <div class="qr-image-wrapper">
+    <img src="{{ qr_url }}" alt="Generated QR Code">
+  </div>
+  
+  <div>
+    <a href="{{ qr_url }}" download="{{ file_name }}" class="btn btn-primary btn-download">
+      <i class="fas fa-download"></i> Download QR Code
+    </a>
+    <br>
+    <a href="{% url 'generate_qr_code' %}" class="btn btn-outline-secondary btn-back">
+      <i class="fas fa-plus"></i> Generate Another
+    </a>
+  </div>
+  
+  <p class="footer-text">
+    <i class="fas fa-heart" style="color: #e74c3c;"></i> Thank you for using our QR Code Generator!
+  </p>
+</div>
+{% endblock %}
