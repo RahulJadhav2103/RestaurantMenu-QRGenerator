@@ -73,7 +73,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-ACCOUNT_ADAPTER = 'django_qrcode.adapters.CustomAccountAdapter'
+
 
 
 TEMPLATES = [
